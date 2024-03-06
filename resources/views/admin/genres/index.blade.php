@@ -1,0 +1,40 @@
+<x-app-layout>
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h1 class="card-title">All Genres</h1>
+                <a href="{{ route('admin.genres.create')}}" class="btn btn-primary">Add New Genre</a>
+            </div>
+            <div class="card-body">
+                <!-- <a href="{{ route('admin.books.create') }}" class="btn btn-primary">Add New Book</a> -->
+                <table class="table mt-3">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Description</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($genres as $genre)
+                        <tr>
+                            <td class="text-center">{{ $genre->genre_Name }}</td>
+                            <td class="text-center">{{ $genre->Description }}</td>
+                            <td class="text-center">
+                                <a href="{{ route('admin.genres.show', $genre->id) }}" class="btn btn-info">View</a>
+                                <a href="{{ route('admin.genres.edit', $genre->id) }}" class="btn btn-primary">Edit</a>
+                                <form action="{{ route('admin.genres.destroy', $genre->id) }}" method="post"
+                                    style="display:inline;">
+                                    @csrf
+                                    <button class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
