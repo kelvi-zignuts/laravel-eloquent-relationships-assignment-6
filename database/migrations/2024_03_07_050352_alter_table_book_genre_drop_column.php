@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('library_card', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('book_genre', function (Blueprint $table) {
+            $table->dropColumn('id');
+            $table->dropColumn('created_at');
+            $table->dropColumn('updated_at');
         });
     }
 
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('library_card');
+        //
     }
 };

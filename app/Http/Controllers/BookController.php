@@ -10,7 +10,7 @@ class BookController extends Controller
 {
     public function index()
     {
-        $books = Book::all();
+        $books = Book::with('genres')->get();
         return view('admin.books.index',compact('books'));
     }
     public function create()
@@ -20,6 +20,11 @@ class BookController extends Controller
     }
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'genres' => 'required|array', // Ensure genres is an array
+        ]);
         $book = new Book();
         $book->Title = $request->input('title');
         $book->Author = $request->input('author');

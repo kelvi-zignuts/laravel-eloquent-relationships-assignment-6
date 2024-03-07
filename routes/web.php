@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\CardController;
 // use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,14 @@ Route::prefix('admin')->group(function () {
     Route::get('genres/{genre}', [GenreController::class, 'show'])->name('admin.genres.show');
     Route::post('genres/{genre}/update', [GenreController::class, 'update'])->name('admin.genres.update');
     Route::post('genres/{genre}/delete', [GenreController::class, 'destroy'])->name('admin.genres.destroy');
+
+    Route::get('/cards', [CardController::class, 'index'])->name('admin.cards.index');
+    Route::get('/cards/create', [CardController::class, 'create'])->name('admin.cards.create');
+    Route::post('/cards', [CardController::class, 'store'])->name('admin.cards.store');
+    Route::get('/cards/{id}', [CardController::class, 'show'])->name('admin.cards.show');
+    Route::get('/cards/{id}/edit', [CardController::class, 'edit'])->name('admin.cards.edit');
+    Route::put('/cards/{id}', [CardController::class, 'update'])->name('admin.cards.update');
+    Route::delete('/cards/{id}', [CardController::class, 'destroy'])->name('admin.cards.destroy');
     // Add more admin routes as needed
 });
 // Route::get('/home', [HomeController::class,'index']);
