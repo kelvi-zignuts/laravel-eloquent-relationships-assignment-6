@@ -34,6 +34,12 @@
                         {{ __('Users') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('admin.issued_books.index')" :active="request()->routeIs('admin.issued_books.index')">
+                        {{ __('Issued Books') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

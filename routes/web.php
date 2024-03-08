@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\GenreController;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\IssuedBooksDetailController;
 // use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,14 @@ Route::prefix('admin')->group(function () {
     Route::get('/cards/{id}/edit', [CardController::class, 'edit'])->name('admin.cards.edit');
     Route::put('/cards/{id}', [CardController::class, 'update'])->name('admin.cards.update');
     Route::delete('/cards/{id}', [CardController::class, 'destroy'])->name('admin.cards.destroy');
+
+    Route::get('/issued_books', [IssuedBooksDetailController::class, 'index'])->name('admin.issued_books.index');
+    Route::get('/issued_books/create', [IssuedBooksDetailController::class, 'create'])->name('admin.issued_books.create');
+    Route::post('/issued_books/store', [IssuedBooksDetailController::class, 'store'])->name('admin.issued_books.store');
+    Route::get('issued_books/{issuedBook}', [IssuedBooksDetailController::class, 'show'])->name('admin.issued_books.show');
+    Route::get('/issued_books/{issuedBook}/edit', [IssuedBooksDetailController::class, 'edit'])->name('admin.issued_books.edit');
+    Route::put('/issued_books/{issuedBook}', [IssuedBooksDetailController::class, 'update'])->name('admin.issued_books.update');
+    Route::delete('/issued_books/{issuedBook}', [IssuedBooksDetailController::class, 'destroy'])->name('admin.issued_books.destroy');
     // Add more admin routes as needed
 });
 // Route::get('/home', [HomeController::class,'index']);

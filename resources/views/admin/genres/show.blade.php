@@ -1,6 +1,20 @@
+
+
 <x-app-layout>
-    <h1>{{ $genre->genre_Name }}</h1>
-    <p><strong>Description:</strong> {{ $genre->Description }}</p>
-    <!-- Add more genre details as needed -->
-    <a href="{{ route('admin.genres.index') }}" class="btn btn-primary">Back</a>
+    <div class="container mt-4">
+        <a href="{{ route('admin.genres.index') }}" class="btn btn-primary" style="margin-left: 10px; margin-bottom: 10px;">Back</a>
+    </div>
+    <div class="container mt-4 d-flex justify-content-center align-items-center">
+        <div class="card" style="width: 50%; margin-top: 20px;">
+            <div class="card-header text-center">
+                <h1 class="card-title">Genres Details</h1>
+            </div>
+            <div class="card-body">
+                <p><strong>Name:</strong> {{ $genre->genre_Name }}</p>
+                <p><strong>Description:</strong> {{ $genre->Description }}</p>
+                <!-- <a href="{{ route('admin.genres.index') }}" class="btn btn-primary" style="margin-top: 10px;">Edit</a> -->
+                <!-- Add delete functionality if needed -->
+            </div>
+        </div>
+    </div>
 </x-app-layout>

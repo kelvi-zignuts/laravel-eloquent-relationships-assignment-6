@@ -1,12 +1,14 @@
 <!-- resources/views/cards/index.blade.php -->
 
 <x-app-layout>
+  
     <div class="container mt-4">
+    <h2>Library Cards</h2>
         <a href="{{ route('admin.cards.create') }}" class="btn btn-success">Create Library Card</a>
     </div>
 
     <div class="container mt-4">
-        <h2>Library Cards</h2>
+        
 
         <!-- @if(session('success'))
             <div class="alert alert-success mt-3">

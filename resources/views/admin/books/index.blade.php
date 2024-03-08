@@ -17,6 +17,7 @@
                         <tr>
                             <th class="text-center">Title</th>
                             <th class="text-center">Author</th>
+                            <th class="text-center">Issued</th>
                             <th class="text-center">Actions</th>
                         </tr>
                     </thead>
@@ -25,6 +26,7 @@
                         <tr>
                             <td class="text-center">{{$book->Title }}</td>
                             <td class="text-center">{{$book->Author}}</td>
+                            <td class="text-center">{{ $book->issued }}</td>
                             <td class="text-center">
                                 <a href="{{ route('admin.books.show',$book->id) }}" class="btn btn-info">View</a>
                                 <a href="{{ route('admin.books.edit',$book->id) }}" class="btn btn-primary">Edit</a>

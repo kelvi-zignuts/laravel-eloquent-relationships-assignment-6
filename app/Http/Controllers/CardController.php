@@ -1,16 +1,20 @@
 <?php
 
+// app/Http/Controllers/CardController.php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\LibraryCard;
+use App\Models\IssuedBooksDetail;
 use App\Models\Preference;
 use Auth;
+
 class CardController extends Controller
 {
     public function index()
     {
-        $cards = LibraryCard::all();
+        $cards = LibraryCard::with('issuedBooksDetails')->get();
         return view('admin.cards.index', compact('cards'));
     }
 
@@ -27,12 +31,15 @@ class CardController extends Controller
             'expiry_date' => 'required|date|after:issued_date',
         ]);
 
+        $user = auth()->user();
+
         $libraryCard = LibraryCard::create([
             'card_id' => $this->generateCardId(),
-            'user_id' => Auth::id(),
+            'user_id' => $user->id,
             'name' => $request->input('name'),
             'issued_date' => $request->input('issued_date'),
             'expiry_date' => $request->input('expiry_date'),
+            'created_by' => $user->id,
         ]);
 
         return redirect()->route('admin.cards.index')->with('success', 'Library card created successfully!');
@@ -40,7 +47,7 @@ class CardController extends Controller
 
     public function show($id)
     {
-        $card = LibraryCard::findOrFail($id);
+        $card = LibraryCard::with('issuedBooksDetails')->findOrFail($id);
         return view('admin.cards.show', compact('card'));
     }
 
@@ -60,10 +67,12 @@ class CardController extends Controller
             'expiry_date' => 'required|date|after:issued_date',
         ]);
 
+        $user = auth()->user();
         $card->update([
             'name' => $request->input('name'),
             'issued_date' => $request->input('issued_date'),
             'expiry_date' => $request->input('expiry_date'),
+            'updated_by' => $user->id,
         ]);
 
         return redirect()->route('admin.cards.index')->with('success', 'Library card updated successfully!');

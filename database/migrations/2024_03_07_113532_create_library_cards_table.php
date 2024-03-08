@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('name');
             $table->date('issued_date');
             $table->date('expiry_date');
+            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('cascade');
+            $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

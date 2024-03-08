@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('Title');
             $table->string('Author');
+            $table->boolean('is_issued')->default(false);
             $table->timestamps();
         });
     }
