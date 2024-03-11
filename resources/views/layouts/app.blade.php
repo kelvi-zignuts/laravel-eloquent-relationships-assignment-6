@@ -71,15 +71,14 @@
 
     function toggleReturnDateField() {
             var isReturned = document.getElementById('is_returned').value;
-            var returnDateGroup = document.getElementById('return_date_group');
             var returnDateInput = document.getElementById('return_date_at');
 
             if (isReturned == 1) {
-                returnDateGroup.style.display = 'block';
                 returnDateInput.removeAttribute('disabled');
+                returnDateInput.value = ''; // Clear the value
             } else {
-                returnDateGroup.style.display = 'none';
                 returnDateInput.setAttribute('disabled', 'disabled');
+                returnDateInput.value = '-'; // Set the value to '-'
             }
         }
 
