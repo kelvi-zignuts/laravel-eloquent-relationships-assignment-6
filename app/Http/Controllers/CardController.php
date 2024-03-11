@@ -24,26 +24,24 @@ class CardController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'issued_date' => 'required|date',
-            'expiry_date' => 'required|date|after:issued_date',
-        ]);
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'issued_date' => 'required|date',
+        'expiry_date' => 'required|date|after:issued_date',
+    ]);
 
-        $user = auth()->user();
+    $user = auth()->user();
 
-        $libraryCard = LibraryCard::create([
-            'card_id' => $this->generateCardId(),
-            'user_id' => $user->id,
-            'name' => $request->input('name'),
-            'issued_date' => $request->input('issued_date'),
-            'expiry_date' => $request->input('expiry_date'),
-            'created_by' => $user->id,
-        ]);
+    $request_data = $request->only(['name', 'issued_date','expiry_date']);
+    $libraryCard = LibraryCard::create($request_data + [
+        'card_id' => $this->generateCardId(),
+        'user_id' => $user->id,
+        'created_by' => $user->id,
+    ]);
 
-        return redirect()->route('admin.cards.index')->with('success', 'Library card created successfully!');
-    }
+    return redirect()->route('admin.cards.index')->with('success', 'Library card created successfully!');
+}
 
     public function show($id)
     {
@@ -68,13 +66,17 @@ class CardController extends Controller
         ]);
 
         $user = auth()->user();
-        $card->update([
-            'name' => $request->input('name'),
-            'issued_date' => $request->input('issued_date'),
-            'expiry_date' => $request->input('expiry_date'),
-            'updated_by' => $user->id,
-        ]);
+        // $card->update([
+        //     'name' => $request->input('name'),
+        //     'issued_date' => $request->input('issued_date'),
+        //     'expiry_date' => $request->input('expiry_date'),
+        //     'updated_by' => $user->id,
+        // ]);
 
+        $request_data = $request->only(['name', 'issued_date','expiry_date']);
+        $card ->update($request_data + [
+        'updated_by' => $user->id,
+    ]);
         return redirect()->route('admin.cards.index')->with('success', 'Library card updated successfully!');
     }
 
@@ -86,7 +88,7 @@ class CardController extends Controller
         return redirect()->route('admin.cards.index')->with('success', 'Library card deleted successfully!');
     }
 
-    private function generateCardId()
+    public function generateCardId()
     {
         // Retrieve the next card ID
         $nextCardId = Preference::where('key', 'next_card_id')->first();

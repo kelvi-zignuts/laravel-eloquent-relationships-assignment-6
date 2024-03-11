@@ -1,5 +1,8 @@
 <x-app-layout>
     <div class="container mt-4">
+        @if(session('success'))
+        <div class="alert alert-success" id="successAlert">{{ session('success') }}</div>
+        @endif
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h1 class="card-title">All Genres</h1>
@@ -26,7 +29,7 @@
                                 <form action="{{ route('admin.genres.destroy', $genre->id) }}" method="post"
                                     style="display:inline;">
                                     @csrf
-                                    <button class="btn btn-danger">Delete</button>
+                                    <button  class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this issued book?')">Delete</button>
                                 </form>
                             </td>
 

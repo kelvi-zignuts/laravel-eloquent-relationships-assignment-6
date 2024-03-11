@@ -12,7 +12,7 @@ class Book extends Model
     protected $fillable = [
         'Title',
         'Author',
-        'is_issued',
+        // 'is_issued',
     ];
     public function genres()
     {

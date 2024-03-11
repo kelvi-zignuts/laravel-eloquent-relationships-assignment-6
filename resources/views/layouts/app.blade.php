@@ -10,7 +10,7 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     <!-- <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> -->
 
@@ -22,7 +22,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-        <!-- for multiple dropdown -->
+    <!-- for multiple dropdown -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -60,6 +60,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script>
+        // for multiple option selection
     $(document).ready(function() {
         // Select2 Multiple
         $('.select2-multiple').select2({
@@ -69,33 +70,43 @@
 
     });
 
+    //if not selected return_date_at then show (-)
     function toggleReturnDateField() {
-            var isReturned = document.getElementById('is_returned').value;
-            var returnDateInput = document.getElementById('return_date_at');
+        let isReturned = document.getElementById('is_returned').value;
+        let returnDateInput = document.getElementById('return_date_at');
 
-            if (isReturned == 1) {
-                returnDateInput.removeAttribute('disabled');
-                returnDateInput.value = ''; // Clear the value
-            } else {
-                returnDateInput.setAttribute('disabled', 'disabled');
-                returnDateInput.value = '-'; // Set the value to '-'
-            }
+        if (isReturned == 1) {
+            returnDateInput.removeAttribute('disabled');
+            returnDateInput.value = ''; // Clear the value
+        } else {
+            returnDateInput.setAttribute('disabled', 'disabled');
+            returnDateInput.value = '-'; // Set the value to '-'
+        }
+    }
+
+    // Initialize the visibility on page load
+    toggleReturnDateField();
+
+    //when select yes option then required select date of return_date_at
+    function validateForm() {
+        let isReturned = document.getElementById('is_returned').value;
+        let returnDateInput = document.getElementById('return_date_at').value;
+
+        if (isReturned == 1 && returnDateInput.trim() === '') {
+            alert('Return Date At is required when "Is Returned" is set to "Yes".');
+            return false; // Prevent form submission
         }
 
-        // Initialize the visibility on page load
-        toggleReturnDateField();
+        return true; // Continue with form submission
+    }
 
-        function validateForm() {
-            var isReturned = document.getElementById('is_returned').value;
-            var returnDateInput = document.getElementById('return_date_at').value;
-
-            if (isReturned == 1 && returnDateInput.trim() === '') {
-                alert('Return Date At is required when "Is Returned" is set to "Yes".');
-                return false; // Prevent form submission
+    //for alert message
+        setTimeout(function () {
+            let errorAlert = document.getElementById('errorAlert');
+            if (errorAlert) {
+                errorAlert.style.display = 'none'; // Hide the initial alert after a delay
             }
-
-            return true; // Continue with form submission
-        }
+        }, 2000);
     </script>
 </body>
 

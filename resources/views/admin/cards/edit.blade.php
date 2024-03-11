@@ -12,7 +12,6 @@
             <div class="card-body">
                 <form action="{{ route('admin.cards.update', $card->id) }}" method="post">
                     @csrf
-                    @method('PUT')
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name" value="{{ $card->name }}">

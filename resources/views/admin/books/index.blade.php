@@ -4,10 +4,15 @@
             style="margin-left:10px; marign-bottom:10px;">Back</a>
 
     </div>
+
     <div class="container mt-4">
+        @if(session('success'))
+        <div class="alert alert-success" id="successAlert">{{ session('success') }}</div>
+        @endif
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h1 class="card-title">All Books</h1>
+
                 <a href="{{ route('admin.books.create') }}" class="btn btn-primary">Add New Book</a>
             </div>
             <div class="card-body">
@@ -26,7 +31,13 @@
                         <tr>
                             <td class="text-center">{{$book->Title }}</td>
                             <td class="text-center">{{$book->Author}}</td>
-                            <td class="text-center">{{ $book->issued }}</td>
+                            <td class="text-center">
+                                @if($book->issuedBooksDetails->isNotEmpty())
+                                <span style="color: red;">Issued</span>
+                                @else
+                                <span style="color: green;">Available</span>
+                                @endif
+                            </td>
                             <td class="text-center">
                                 <a href="{{ route('admin.books.show',$book->id) }}" class="btn btn-info">View</a>
                                 <a href="{{ route('admin.books.edit',$book->id) }}" class="btn btn-primary">Edit</a>
@@ -43,4 +54,5 @@
             </div>
         </div>
     </div>
+    
 </x-app-layout>

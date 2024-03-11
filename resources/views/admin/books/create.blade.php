@@ -7,11 +7,11 @@
                     @csrf
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" class="form-control" id="title" name="title">
+                        <input type="text" class="form-control" id="title" name="title" required>
                     </div><br>
                     <div class="form-group ">
                         <label for="author">Author</label>
-                        <input type="text" class="form-control" id="author" name="author">
+                        <input type="text" class="form-control" id="author" name="author" required>
                     </div><br>
                     <!-- <div class="form-group">
                         <label for="genres">Genres:</label>
@@ -23,7 +23,7 @@
                     <div class="form-group mb-3">
                         <label for="select2Multiple">Genres:</label>
                         <select class="select2-multiple form-control" name="genres[]" multiple="multiple"
-                            id="select2Multiple">
+                            id="select2Multiple" required>
                             @foreach($genres as $genre)
                             <option value="{{ $genre->id }}">{{ $genre->genre_Name }}</option>
                             @endforeach
@@ -36,4 +36,12 @@
         </div>
     </div>
     </div>
+    <!-- <script>
+        setTimeout(function () {
+            let errorAlert = document.getElementById('errorAlert');
+            if (errorAlert) {
+                errorAlert.style.display = 'none'; // Hide the alert after a delay
+            }
+        }, 2000);
+    </script> -->
 </x-app-layout>

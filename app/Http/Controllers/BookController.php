@@ -8,16 +8,19 @@ use App\Models\Genre;
 
 class BookController extends Controller
 {
+    //show all books in index page
     public function index()
     {
         $books = Book::with('genres')->get();
         return view('admin.books.index',compact('books'));
     }
+    //create books
     public function create()
     {
         $genres = Genre::all();
         return view('admin.books.create',compact('genres'));
     }
+    //store in database
     public function store(Request $request)
     {
         $request->validate([
@@ -25,14 +28,30 @@ class BookController extends Controller
             'author' => 'required|string|max:255',
             'genres' => 'required|array', // Ensure genres is an array
         ]);
-        $book = new Book();
-        $book->Title = $request->input('title');
-        $book->Author = $request->input('author');
-        $book->save();
+        // $book = new Book();
+        // $book->Title = $request->input('title');
+        // $book->Author = $request->input('author');
+        // $book->save();
+        // dd($request->all(),$request->genres);
+        //         // $bookData = $request->only('title', 'author');
+        // $book = Book::create($request->only([
+        //     'Title'     => $request->title ?? "rakhee",
+        //     'Author'     => $request->author,
+        // ]));
 
-        $book->genres()->attach($request->input('genres'));
 
-        return redirect()->route('admin.books.index');
+        //only method using unset
+        $bookData = $request->only(['title', 'author']);
+        $bookData['Title'] = $bookData['title']; // Map 'title' to 'Title'
+        $bookData['Author'] = $bookData['author']; // Map 'author' to 'Author'
+        unset($bookData['title'],$bookData['author']); // Unset 'title' as it's not needed anymore
+
+        $book = Book::create($bookData);
+// dd($book);
+
+        $book->genres()->attach($request->genres);
+
+        return redirect()->route('admin.books.index')->with('success', 'book added successfully.');
     }
     public function edit($id)
     {
@@ -41,18 +60,26 @@ class BookController extends Controller
         return view('admin.books.edit',compact('book','genres'));
     }
     public function update(Request $request, $id)
-    {
-        $book = Book::findOrFail($id);
-        $book->Title = $request->input('title');
-        $book->Author = $request->input('author');
-        // Add more fields as needed
-        $book->save();
+{
+    $book = Book::findOrFail($id);
 
-        // Sync genres for the book
-        $book->genres()->sync($request->input('genres'));
+    // $request->validate([
+    //     'title' => 'required|string|max:255',
+    //     'author' => 'required|string|max:255',
+    //     'genres' => 'required|array', // Ensure genres is an array
+    // ]);
 
-        return redirect()->route('admin.books.index');
-    }
+    $bookData = $request->only(['title', 'author']);
+    $bookData['Title'] = $bookData['title']; // Map 'title' to 'Title'
+    unset($bookData['title']); // Unset 'title' as it's not needed anymore
+
+    $book->update($bookData);
+
+    // Sync genres for the book
+    $book->genres()->sync($request->input('genres'));
+
+    return redirect()->route('admin.books.index')->with('success', 'book update successfully.');;
+}
 
     // Delete the specified book from storage
     public function destroy($id)
@@ -60,7 +87,7 @@ class BookController extends Controller
         $book = Book::findOrFail($id);
         $book->delete();
 
-        return redirect()->route('admin.books.index');
+        return redirect()->route('admin.books.index')->with('success', 'book deleted successfully.');;
     }
     public function show($id)
     {
