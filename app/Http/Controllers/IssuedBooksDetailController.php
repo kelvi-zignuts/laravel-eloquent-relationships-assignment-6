@@ -148,7 +148,7 @@ public function store(Request $request)
             $selectedBooks = $request->input('books', []);
     
             // Detach all currently associated books
-            // $issuedBook->books()->detach();
+            $issuedBook->books()->detach();
     
             foreach ($selectedBooks as $bookId) {
                 $book = Book::find($bookId);
