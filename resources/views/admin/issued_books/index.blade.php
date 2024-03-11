@@ -26,7 +26,7 @@
                         <td>{{ $issuedBook->libraryCard->name }} - {{ $issuedBook->libraryCard->user->name }}</td>
                         <td>{{ $issuedBook->issued_date }}</td>
                         <td>{{ $issuedBook->fixed_return_date }}</td>
-                        <td>{{ $issuedBook->is_returned }}</td>
+                        <td>{{ $issuedBook->is_returned ? 'yes':'no' }}</td>
                         <td>{{ $issuedBook->return_date_at }}</td>
                         <td>
                             <a href="{{ route('admin.issued_books.edit', $issuedBook->id) }}" class="btn btn-primary">Edit</a>

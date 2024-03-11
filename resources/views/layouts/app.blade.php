@@ -68,6 +68,35 @@
         });
 
     });
+
+    function toggleReturnDateField() {
+            var isReturned = document.getElementById('is_returned').value;
+            var returnDateGroup = document.getElementById('return_date_group');
+            var returnDateInput = document.getElementById('return_date_at');
+
+            if (isReturned == 1) {
+                returnDateGroup.style.display = 'block';
+                returnDateInput.removeAttribute('disabled');
+            } else {
+                returnDateGroup.style.display = 'none';
+                returnDateInput.setAttribute('disabled', 'disabled');
+            }
+        }
+
+        // Initialize the visibility on page load
+        toggleReturnDateField();
+
+        function validateForm() {
+            var isReturned = document.getElementById('is_returned').value;
+            var returnDateInput = document.getElementById('return_date_at').value;
+
+            if (isReturned == 1 && returnDateInput.trim() === '') {
+                alert('Return Date At is required when "Is Returned" is set to "Yes".');
+                return false; // Prevent form submission
+            }
+
+            return true; // Continue with form submission
+        }
     </script>
 </body>
 
