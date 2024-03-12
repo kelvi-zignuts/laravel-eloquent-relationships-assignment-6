@@ -31,8 +31,8 @@
                         @foreach($issuedBooks as $issuedBook)
                         <tr class="text-center">
                             <td>{{ $issuedBook->libraryCard->name }} - {{ $issuedBook->libraryCard->user->name }}</td>
-                            <td>{{ $issuedBook->issued_date }}</td>
-                            <td>{{ $issuedBook->fixed_return_date }}</td>
+                            <td>{{ date('d/m/Y ', strtotime($issuedBook->issued_date))}}</td>
+                            <td>{{ date('d/m/Y ', strtotime($issuedBook->fixed_return_date))}}</td>
                             <td>{{ $issuedBook->is_returned ? 'yes':'no' }}</td>
                             <td>{{ $issuedBook->is_returned ? $issuedBook->return_date_at : '-' }}</td>
                             <td>

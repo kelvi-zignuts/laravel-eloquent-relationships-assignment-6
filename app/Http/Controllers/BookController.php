@@ -13,7 +13,9 @@ class BookController extends Controller
     {
         // $books = Book::with('genres')->get();
         $books = Book::all();
-        return view('admin.books.index',compact('books'));
+        $booksCount = Book::count();
+        return view('admin.books.index',['books'=>$books,'booksCount'=>$booksCount]);
+
     }
 
     //create books

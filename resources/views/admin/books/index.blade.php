@@ -20,6 +20,11 @@
                         </tr>
                     </thead>
                     <tbody>
+                    @if($books->isEmpty())
+                        <tr>
+                            <td colspan="4" class="text-center" style="color:red;">No books available</td>
+                        </tr>
+                        @else
                         @foreach ($books as $book)
                         <tr class="text-center">
                             <td>{{$book->title }}</td>
@@ -50,6 +55,7 @@
                             </td>
                         </tr>
                         @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>

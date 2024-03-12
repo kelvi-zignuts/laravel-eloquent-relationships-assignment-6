@@ -17,7 +17,7 @@
                     </div>
                     <div class="form-group">
                         <label for="issued_date">Issued Date</label>
-                        <input type="date" class="form-control" id="issued_date" name="issued_date" required>
+                        <input type="date" class="form-control" id="issued_date" name="issued_date"  required>
                     </div>
                     <div class="form-group">
                         <label for="expiry_date">Expiry Date</label>

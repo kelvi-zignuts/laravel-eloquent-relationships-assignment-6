@@ -14,8 +14,8 @@
                         <label for="card_id">Library Card:</label>
                         <select name="card_id" id="card_id" class="form-control" required>
                             @foreach($libraryCards as $libraryCard)
-                            <option value="{{ $libraryCard->id }}">{{ $libraryCard->name }} -
-                                {{ $libraryCard->user->name }}</option>
+                            <option value="{{ $libraryCard->id }}">{{ $libraryCard->card_id }} -
+                            {{ $libraryCard->name }}</option>
                             @endforeach
                         </select>
                     </div>

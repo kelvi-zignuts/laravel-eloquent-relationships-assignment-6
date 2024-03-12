@@ -31,8 +31,8 @@
                         <tr class="text-center">
                             <td>{{ $card->card_id }}</td>
                             <td>{{ $card->name }}</td>
-                            <td>{{ $card->issued_date }}</td>
-                            <td>{{ $card->expiry_date }}</td>
+                            <td>{{ date('d/m/Y ', strtotime($card->issued_date)) }}</td>
+                            <td>{{ date('d/m/Y ', strtotime($card->expiry_date)) }}</td>
                             <td>
                                 <a href="{{ route('admin.cards.edit', $card->id) }}"
                                     style="margin-right: 40px; color:blue;">

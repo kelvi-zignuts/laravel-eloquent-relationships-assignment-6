@@ -1,5 +1,5 @@
 <x-app-layout>
-<div class="mt-3" style="color:blue;">
+    <div class="mt-3" style="color:blue;">
         <a href="{{route('admin.books.index')}}"><i class="fas fa-arrow-circle-left"
                 style="margin-left:70px; font-size:20px;"></i></a>
     </div>
@@ -15,6 +15,13 @@
                     ,
                     @endif
                     @endforeach
+                </p>
+                <p class="card-text"><strong>issued : </strong>
+                    @if($book->issuedBooksDetails->isNotEmpty())
+                    <span style="color: red;">Issued</span>
+                    @else
+                    <span style="color: green;">Available</span>
+                    @endif
                 </p>
                 <!-- <a href="{{ route('admin.books.index') }}" class="btn btn-primary">Back</a> -->
             </div>

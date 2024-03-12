@@ -18,6 +18,11 @@
                         </tr>
                     </thead>
                     <tbody>
+                    @if($genres->isEmpty())
+                        <tr>
+                            <td colspan="4" class="text-center" style="color:red;">No genres available</td>
+                        </tr>
+                        @else
                         @foreach ($genres as $genre)
                         <tr>
                             <td class="text-center">{{ $genre->genre_name }}</td>
@@ -41,6 +46,7 @@
                             </td>
                         </tr>
                         @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>

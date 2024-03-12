@@ -11,6 +11,14 @@
                     {{ $issuedBook->libraryCard->user->name }}</h5>
                 <p class="card-text">Issued Date: {{ $issuedBook->issued_date }}</p>
                 <p class="card-text">Fixed Return Date: {{ $issuedBook->fixed_return_date }}</p>
+                <p class="card-text">Issued Books: 
+                @foreach ($issuedBook->books as $book)
+                    {{ $book->title }}
+                    @if (!$loop->last)
+                    ,
+                    @endif
+                    @endforeach
+                    </p>
                 <!-- <a href="{{ route('admin.issued_books.index') }}" class="btn btn-primary mt-3">Back to Issued Books</a> -->
             </div>
         </div>
