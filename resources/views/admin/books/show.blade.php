@@ -2,11 +2,11 @@
     <div class="container mt-4 d-flex justify-content-center align-items-center">
         <div class="card" style="width: 50%;">
             <div class="card-body">
-                <h1 class="card-title">{{ $book->Title }}</h1>
-                <p class="card-text"><strong>Author:</strong> {{ $book->Author }}</p>
+                <h1 class="card-title">{{ $book->title }}</h1>
+                <p class="card-text"><strong>Author:</strong> {{ $book->author }}</p>
                 <p class="card-text"><strong>Genres:</strong>
                     @foreach ($book->genres as $genre)
-                        {{ $genre->genre_Name }}
+                        {{ $genre->genre_name }}
                         @if (!$loop->last)
                             ,
                         @endif

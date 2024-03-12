@@ -1,5 +1,3 @@
-<!-- resources/views/issued_books/index.blade.php -->
-
 <x-app-layout>
     <div class="container  mt-4">
         <!-- <h2>Issued Books</h2> -->

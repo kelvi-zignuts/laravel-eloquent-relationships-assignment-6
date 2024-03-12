@@ -25,7 +25,7 @@
                         <select class="select2-multiple form-control" name="genres[]" multiple="multiple"
                             id="select2Multiple" required>
                             @foreach($genres as $genre)
-                            <option value="{{ $genre->id }}">{{ $genre->genre_Name }}</option>
+                            <option value="{{ $genre->id }}">{{ $genre->genre_name }}</option>
                             @endforeach
                         </select>
                     </div>

@@ -10,8 +10,8 @@
                 <h1 class="card-title">Genres Details</h1>
             </div>
             <div class="card-body">
-                <p><strong>Name:</strong> {{ $genre->genre_Name }}</p>
-                <p><strong>Description:</strong> {{ $genre->Description }}</p>
+                <p><strong>Name:</strong> {{ $genre->genre_name }}</p>
+                <p><strong>Description:</strong> {{ $genre->description }}</p>
                 <!-- <a href="{{ route('admin.genres.index') }}" class="btn btn-primary" style="margin-top: 10px;">Edit</a> -->
                 <!-- Add delete functionality if needed -->
             </div>

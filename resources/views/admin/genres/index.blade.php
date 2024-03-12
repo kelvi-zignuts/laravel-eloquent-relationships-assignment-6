@@ -21,8 +21,8 @@
                     <tbody>
                         @foreach ($genres as $genre)
                         <tr>
-                            <td class="text-center">{{ $genre->genre_Name }}</td>
-                            <td class="text-center">{{ $genre->Description }}</td>
+                            <td class="text-center">{{ $genre->genre_name }}</td>
+                            <td class="text-center">{{ $genre->description }}</td>
                             <td class="text-center">
                                 <a href="{{ route('admin.genres.show', $genre->id) }}" class="btn btn-info">View</a>
                                 <a href="{{ route('admin.genres.edit', $genre->id) }}" class="btn btn-primary">Edit</a>

@@ -12,11 +12,11 @@
                     @csrf
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" class="form-control" id="title" name="title" value="{{ $book->Title }}">
+                        <input type="text" class="form-control" id="title" name="title" value="{{ $book->title }}">
                     </div>
                     <div class="form-group">
                         <label for="author">Author</label>
-                        <input type="text" class="form-control" id="author" name="author" value="{{ $book->Author }}">
+                        <input type="text" class="form-control" id="author" name="author" value="{{ $book->author }}">
                     </div>
                     <div class="form-group">
                         <label for="genres">Genres:</label>

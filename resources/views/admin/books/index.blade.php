@@ -29,8 +29,8 @@
                     <tbody>
                         @foreach ($books as $book)
                         <tr>
-                            <td class="text-center">{{$book->Title }}</td>
-                            <td class="text-center">{{$book->Author}}</td>
+                            <td class="text-center">{{$book->title }}</td>
+                            <td class="text-center">{{$book->author}}</td>
                             <td class="text-center">
                                 @if($book->issuedBooksDetails->isNotEmpty())
                                 <span style="color: red;">Issued</span>
@@ -44,7 +44,8 @@
                                 <form action="{{ route('admin.books.destroy',$book->id) }}" method="post"
                                     style="display:inline;">
                                     @csrf
-                                    <button class="btn btn-danger">Delete</button>
+                                    <button class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Are you sure you want to delete this card?')">Delete</button>
                                 </form>
                             </td>
                         </tr>
@@ -53,6 +54,5 @@
                 </table>
             </div>
         </div>
-    </div>
-    
+    </div>   
 </x-app-layout>

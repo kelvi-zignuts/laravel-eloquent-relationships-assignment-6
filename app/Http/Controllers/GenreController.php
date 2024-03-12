@@ -22,22 +22,18 @@ class GenreController extends Controller
 
     // Store a newly created genre in storage
     public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'description' => 'required|string|max:255',
-    ]);
-
-    $genreData = $request->only(['name', 'description']);
-
-    Genre::create([
-        'genre_Name' => $genreData['name'],
-        'Description' => $genreData['description'],
-    ]);
-
-    return redirect()->route('admin.genres.index')->with('success', 'Genre created successfully!');
-}
-
+    {
+        $request->validate([
+            'genre_name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+        ]);
+    
+        $genreData = $request->only(['genre_name', 'description']);
+    
+        Genre::create($genreData);
+    
+        return redirect()->route('admin.genres.index')->with('success', 'Genre created successfully!');
+    }    
     // Show form to edit a genre
     public function edit($id)
     {
@@ -49,11 +45,8 @@ class GenreController extends Controller
     public function update(Request $request, $id)
     {
         $genre = Genre::findOrFail($id);
-        $genreData = $request->only(['name', 'description']);
-        $genre->update([
-            'genre_Name' => $genreData['name'],
-            'Description' => $genreData['description'],
-        ]);
+        $genreData = $request->only(['genre_name', 'description']);
+        $genre->update($genreData);
 
         return redirect()->route('admin.genres.index')->with('success', 'Genre updated successfully!');
     }

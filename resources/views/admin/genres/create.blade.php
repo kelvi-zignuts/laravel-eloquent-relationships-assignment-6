@@ -6,8 +6,8 @@
                 <form action="{{ route('admin.genres.store') }}" method="post">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <label for="genre_name">Name</label>
+                        <input type="text" class="form-control" id="genre_name" name="genre_name" required>
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
