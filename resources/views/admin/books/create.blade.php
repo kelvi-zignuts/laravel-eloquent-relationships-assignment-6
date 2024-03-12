@@ -13,13 +13,6 @@
                         <label for="author">Author</label>
                         <input type="text" class="form-control" id="author" name="author" required>
                     </div><br>
-                    <!-- <div class="form-group">
-                        <label for="genres">Genres:</label>
-                        <select name="genres[]" class="form-control" >
-                            <option value="" selected disabled>Choose Genre</option>
-                            
-                        </select>
-                    </div> -->
                     <div class="form-group mb-3">
                         <label for="select2Multiple">Genres:</label>
                         <select class="select2-multiple form-control" name="genres[]" multiple="multiple"
@@ -30,18 +23,8 @@
                         </select>
                     </div>
                     <button class="btn btn-primary mt-3">Submit</button>
+                </form>
             </div>
-
-            </form>
         </div>
     </div>
-    </div>
-    <!-- <script>
-        setTimeout(function () {
-            let errorAlert = document.getElementById('errorAlert');
-            if (errorAlert) {
-                errorAlert.style.display = 'none'; // Hide the alert after a delay
-            }
-        }, 2000);
-    </script> -->
 </x-app-layout>

@@ -1,4 +1,3 @@
-<!-- resources/views/issued_books/create.blade.php -->
 <x-app-layout>
     <div class="container mt-4">
         @if(session('error'))
@@ -9,9 +8,6 @@
         <div class="card" style="width: 50%;">
             <div class="card-body">
                 <h2 class="card-title">Create Issued Book</h2>
-
-
-
                 <form action="{{ route('admin.issued_books.store') }}" method="post">
                     @csrf
                     <div class="form-group">
@@ -47,11 +43,6 @@
                             <option value="1">Yes</option>
                         </select>
                     </div>
-                    <!-- <div class="form-group" id="return_date_group">
-                        <label for="return_date_at">Return Date At:</label>
-                        <input type="date" name="return_date_at" id="return_date_at" class="form-control" >
-                    </div> -->
-                    
                     <button class="btn btn-primary mt-3">Add Issued Book</button>
                 </form>
             </div>

@@ -1,6 +1,7 @@
 <x-app-layout>
     <div class="container mt-4">
-        <a href="{{ route('admin.books.index') }}" class="btn btn-primary" style="margin-left: 10px; margin-bottom: 10px;">Back</a>
+        <a href="{{ route('admin.books.index') }}" class="btn btn-primary"
+            style="margin-left: 10px; margin-bottom: 10px;">Back</a>
     </div>
     <div class="container mt-4 d-flex justify-content-center align-items-center">
         <div class="card" style="width: 50%; margin-top: 20px;">
@@ -20,16 +21,18 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="select2Multiple">Genres:</label>
-                        <select name="genres[]" class="select2-multiple form-control" multiple="multiple"  id="select2Multiple">
+                        <select name="genres[]" class="select2-multiple form-control" multiple="multiple"
+                            id="select2Multiple">
                             <option value="" disabled>Choose Genre</option>
                             @foreach($genres as $genre)
-                                <option value="{{ $genre->id }}" {{ in_array($genre->id, $book->genres->pluck('id')->toArray()) ? 'selected' : '' }}>
-                                    {{ $genre->genre_name }}
-                                </option>
+                            <option value="{{ $genre->id }}"
+                                {{ in_array($genre->id, $book->genres->pluck('id')->toArray()) ? 'selected' : '' }}>
+                                {{ $genre->genre_name }}
+                            </option>
                             @endforeach
                         </select>
                     </div>
-                    
+
                     <button class="btn btn-primary" style="margin-top: 10px;">Update</button>
                 </form>
             </div>

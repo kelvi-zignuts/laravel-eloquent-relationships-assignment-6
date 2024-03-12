@@ -1,8 +1,7 @@
-<!-- resources/views/cards/create.blade.php -->
-
 <x-app-layout>
     <div class="container mt-4">
-        <a href="{{ route('admin.cards.index') }}" class="btn btn-primary" style="margin-left: 10px; margin-bottom: 10px;">Back</a>
+        <a href="{{ route('admin.cards.index') }}" class="btn btn-primary"
+            style="margin-left: 10px; margin-bottom: 10px;">Back</a>
     </div>
     <div class="container mt-4 d-flex justify-content-center align-items-center">
         <div class="card" style="width: 50%; margin-top: 20px;">

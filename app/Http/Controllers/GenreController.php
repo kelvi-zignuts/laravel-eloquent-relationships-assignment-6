@@ -8,19 +8,20 @@ use App\Models\Genre;
 
 class GenreController extends Controller
 {
+    //show all data
     public function index()
     {
         $genres = Genre::all();
         return view('admin.genres.index', compact('genres'));
     }
 
-    // Show form to create a new genre
+    // create 
     public function create()
     {
         return view('admin.genres.create');
     }
 
-    // Store a newly created genre in storage
+    // Store
     public function store(Request $request)
     {
         $user = auth()->user();
@@ -37,14 +38,14 @@ class GenreController extends Controller
     
         return redirect()->route('admin.genres.index')->with('success', 'Genre created successfully!');
     }    
-    // Show form to edit a genre
+    // edit genre
     public function edit($id)
     {
         $genre = Genre::findOrFail($id);
         return view('admin.genres.edit', compact('genre'));
     }
 
-    // Update the specified genre in storage
+    // Updategenre 
     public function update(Request $request, $id)
     {
         $user = auth()->user();
@@ -55,7 +56,7 @@ class GenreController extends Controller
         return redirect()->route('admin.genres.index')->with('success', 'Genre updated successfully!');
     }
 
-    // Delete the specified genre from storage
+    // Delete genre 
     public function destroy($id)
     {
         $genre = Genre::findOrFail($id);
@@ -63,6 +64,8 @@ class GenreController extends Controller
 
         return redirect()->route('admin.genres.index')->with('success', 'Genre deleted successfully!');
     }
+
+    //view all details
     public function show($id)
     {
         $genre = Genre::findOrFail($id);

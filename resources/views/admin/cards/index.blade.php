@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="container mt-4">
 
-    @if(session('success'))
+        @if(session('success'))
         <div class="alert alert-success" id="successAlert">{{ session('success') }}</div>
         @endif
         <div class="card">
@@ -33,18 +33,6 @@
                             <td>{{ $card->name }}</td>
                             <td>{{ $card->issued_date }}</td>
                             <td>{{ $card->expiry_date }}</td>
-                            <!-- <td>
-                                <a href="{{ route('admin.cards.show', $card->id) }}"
-                                    class="btn btn-info btn-sm">View</a>
-                                <a href="{{ route('admin.cards.edit', $card->id) }}"
-                                    class="btn btn-primary btn-sm">Edit</a>
-                                <form action="{{ route('admin.cards.destroy', $card->id) }}" method="post"
-                                    style="display: inline-block;">
-                                    @csrf
-                                    <button class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Are you sure you want to delete this card?')">Delete</button>
-                                </form>
-                            </td> -->
                             <td>
                                 <a href="{{ route('admin.cards.edit', $card->id) }}"
                                     style="margin-right: 40px; color:blue;">

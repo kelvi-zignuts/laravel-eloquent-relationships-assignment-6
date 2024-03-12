@@ -6,13 +6,12 @@
                 <p class="card-text"><strong>Author:</strong> {{ $book->author }}</p>
                 <p class="card-text"><strong>Genres:</strong>
                     @foreach ($book->genres as $genre)
-                        {{ $genre->genre_name }}
-                        @if (!$loop->last)
-                            ,
-                        @endif
+                    {{ $genre->genre_name }}
+                    @if (!$loop->last)
+                    ,
+                    @endif
                     @endforeach
                 </p>
-                <!-- Add more book details as needed -->
                 <a href="{{ route('admin.books.index') }}" class="btn btn-primary">Back</a>
             </div>
         </div>

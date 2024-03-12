@@ -1,8 +1,7 @@
-<!-- resources/views/cards/edit.blade.php -->
-
 <x-app-layout>
     <div class="container mt-4">
-        <a href="{{ route('admin.cards.index') }}" class="btn btn-primary" style="margin-left: 10px; margin-bottom: 10px;">Back</a>
+        <a href="{{ route('admin.cards.index') }}" class="btn btn-primary"
+            style="margin-left: 10px; margin-bottom: 10px;">Back</a>
     </div>
     <div class="container mt-4 d-flex justify-content-center align-items-center">
         <div class="card" style="width: 50%; margin-top: 20px;">
@@ -18,11 +17,13 @@
                     </div>
                     <div class="form-group">
                         <label for="issued_date">Issued Date</label>
-                        <input type="date" class="form-control" id="issued_date" name="issued_date" value="{{ $card->issued_date }}">
+                        <input type="date" class="form-control" id="issued_date" name="issued_date"
+                            value="{{ $card->issued_date }}">
                     </div>
                     <div class="form-group">
                         <label for="expiry_date">Expiry Date</label>
-                        <input type="date" class="form-control" id="expiry_date" name="expiry_date" value="{{ $card->expiry_date }}">
+                        <input type="date" class="form-control" id="expiry_date" name="expiry_date"
+                            value="{{ $card->expiry_date }}">
                     </div>
                     <button class="btn btn-primary" style="margin-top: 10px;">Update</button>
                 </form>

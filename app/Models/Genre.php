@@ -17,14 +17,20 @@ class Genre extends Model
         'created_by',
         'updated_by',
     ];
+
+    //many genres in many books
     public function books()
     {
         return $this->belongsToMany(Book::class,'book_genre');
     }
+
+    //created_by
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    //updated_by
     public function updatedBy()
     {
         return $this->belongsTo(User::class, 'updated_by');

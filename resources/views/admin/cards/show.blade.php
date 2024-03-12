@@ -1,5 +1,3 @@
-<!-- resources/views/cards/show.blade.php -->
-
 <x-app-layout>
     <div class="container mt-4">
         <a href="{{ route('admin.cards.index') }}" class="btn btn-primary" style="margin-left: 10px; margin-bottom: 10px;">Back</a>
@@ -14,8 +12,6 @@
                 <p><strong>Card ID:</strong> {{ $card->card_id }}</p>
                 <p><strong>Issued Date:</strong> {{ $card->issued_date }}</p>
                 <p><strong>Expiry Date:</strong> {{ $card->expiry_date }}</p>
-                <!-- <a href="{{ route('admin.cards.edit', $card->id) }}" class="btn btn-primary" style="margin-top: 10px;">Edit</a> -->
-                <!-- Add delete functionality if needed -->
             </div>
         </div>
     </div>

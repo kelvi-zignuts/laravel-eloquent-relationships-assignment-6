@@ -43,6 +43,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    //one user have one unique card_id
     public function libraryCard()
     {
         return $this->hasOne(LibraryCard::class, 'user_id');

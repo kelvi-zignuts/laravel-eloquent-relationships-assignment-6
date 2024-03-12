@@ -15,8 +15,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> -->
 
     <!-- bootstrap link  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
@@ -54,6 +52,7 @@
             {{ $slot }}
         </main>
     </div>
+
     <!-- script (jquery) -->
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
@@ -81,10 +80,10 @@
 
         if (isReturned == 1) {
             returnDateInput.removeAttribute('disabled');
-            returnDateInput.value = ''; // Clear the value
+            returnDateInput.value = ''; // Clear value
         } else {
             returnDateInput.setAttribute('disabled', 'disabled');
-            returnDateInput.value = '-'; // Set the value to '-'
+            returnDateInput.value = '-'; // Set value to '-'
         }
     }
 
@@ -98,7 +97,7 @@
 
         if (isReturned == 1 && returnDateInput.trim() === '') {
             alert('Return Date At is required when "Is Returned" is set to "Yes".');
-            return false; // Prevent form submission
+            return false;
         }
 
         return true; // Continue with form submission
@@ -113,6 +112,7 @@
         }
     }, 2000);
 
+    //for success message
     setTimeout(function() {
         let successAlert = document.getElementById('successAlert');
         if (successAlert) {

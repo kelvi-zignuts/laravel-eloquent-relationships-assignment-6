@@ -35,21 +35,6 @@
                             <td>{{ $issuedBook->fixed_return_date }}</td>
                             <td>{{ $issuedBook->is_returned ? 'yes':'no' }}</td>
                             <td>{{ $issuedBook->is_returned ? $issuedBook->return_date_at : '-' }}</td>
-
-                            <!-- <td>{{ $issuedBook->return_date_at ?: '-' }}</td> -->
-                            <!-- <td>
-                                <a href="{{ route('admin.issued_books.edit', $issuedBook->id) }}"
-                                    class="btn btn-primary">Edit</a>
-                                <a href="{{ route('admin.issued_books.show', $issuedBook->id) }}"
-                                    class="btn btn-info">View</a>
-                                <form action="{{ route('admin.issued_books.destroy', $issuedBook->id) }}" method="post"
-                                    class="d-inline">
-                                    @csrf
-                                    <button class="btn btn-danger"
-                                        onclick="return confirm('Are you sure you want to delete this issued book?')">Delete</button>
-                                </form>
-                            </td> -->
-
                             <td>
                                 <a href="{{ route('admin.issued_books.edit', $issuedBook->id) }}"
                                     style="margin-right: 40px; color:blue;">
