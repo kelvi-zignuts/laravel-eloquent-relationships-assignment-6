@@ -55,6 +55,8 @@ class BookController extends Controller
 //     }
 public function store(Request $request)
 {
+    $user = auth()->user();
+
     $request->validate([
         'title' => 'required|string|max:255',
         'author' => 'required|string|max:255',
@@ -63,7 +65,7 @@ public function store(Request $request)
 
     $bookData = $request->only(['title', 'author']);
     
-    $book = Book::create($bookData);
+    $book = Book::create($bookData+ ['created_by' => $user->id]);
     $book->genres()->attach($request->input('genres'));
 
     return redirect()->route('admin.books.index')->with('success', 'Book added successfully.');
@@ -76,11 +78,13 @@ public function store(Request $request)
     }
     public function update(Request $request, $id)
 {
+    $user = auth()->user();
+
     $book = Book::findOrFail($id);
 
     $bookData = $request->only(['title', 'author']);
 
-    $book->update($bookData);
+    $book->update($bookData+ ['updated_by' => $user->id]);
 
     $book->genres()->sync($request->input('genres'));
 

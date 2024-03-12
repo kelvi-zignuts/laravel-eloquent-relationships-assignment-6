@@ -46,5 +46,5 @@ class User extends Authenticatable
     public function libraryCard()
     {
         return $this->hasOne(LibraryCard::class, 'user_id');
-    }
+    }   
 }

@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('author');
+            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('cascade');
+            $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('cascade');
+            $table->softDeletes();
             // $table->boolean('is_issued')->default(false);
             $table->timestamps();
         });

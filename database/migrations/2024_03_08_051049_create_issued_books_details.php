@@ -19,6 +19,9 @@ return new class extends Migration
             $table->date('fixed_return_date');
             $table->boolean('is_returned')->default(false);
             $table->date('return_date_at')->nullable();
+            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('cascade');
+            $table->foreignId('updated_by')->nullable()->constrained('users')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
