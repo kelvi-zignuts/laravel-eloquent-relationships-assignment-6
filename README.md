@@ -14,7 +14,7 @@ Laravel project using Eloquent : Relationships
    ```bash
    composer install
    ```
-   *Install javascript dependencies**
+   **Install javascript dependencies**
    ```bash
    npm install
    ```
