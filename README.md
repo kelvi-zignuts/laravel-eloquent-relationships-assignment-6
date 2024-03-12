@@ -35,6 +35,9 @@ Laravel project using Eloquent : Relationships
 ## Usage
 1. **Serve the application**
    ```bash
+   npm run dev
+   ```
+    ```bash
    php artisan serve
    ```
 2. **Access the application**
