@@ -1,11 +1,5 @@
 <x-app-layout>
     <div class="container mt-4">
-        <a href="{{ route('dashboard') }}" class="btn btn-primary"
-            style="margin-left:10px; marign-bottom:10px;">Back</a>
-
-    </div>
-
-    <div class="container mt-4">
         @if(session('success'))
         <div class="alert alert-success" id="successAlert">{{ session('success') }}</div>
         @endif
@@ -19,26 +13,26 @@
                 <!-- <a href="{{ route('admin.books.create') }}" class="btn btn-primary">Add New Book</a> -->
                 <table class="table mt-3">
                     <thead>
-                        <tr>
-                            <th class="text-center">Title</th>
-                            <th class="text-center">Author</th>
-                            <th class="text-center">Issued</th>
-                            <th class="text-center">Actions</th>
+                        <tr class="text-center">
+                            <th >Title</th>
+                            <th >Author</th>
+                            <th >Issued</th>
+                            <th >Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($books as $book)
-                        <tr>
-                            <td class="text-center">{{$book->title }}</td>
-                            <td class="text-center">{{$book->author}}</td>
-                            <td class="text-center">
+                        <tr class="text-center">
+                            <td >{{$book->title }}</td>
+                            <td >{{$book->author}}</td>
+                            <td >
                                 @if($book->issuedBooksDetails->isNotEmpty())
                                 <span style="color: red;">Issued</span>
                                 @else
                                 <span style="color: green;">Available</span>
                                 @endif
                             </td>
-                            <td class="text-center">
+                            <!-- <td class="text-center">
                                 <a href="{{ route('admin.books.show',$book->id) }}" class="btn btn-info">View</a>
                                 <a href="{{ route('admin.books.edit',$book->id) }}" class="btn btn-primary">Edit</a>
                                 <form action="{{ route('admin.books.destroy',$book->id) }}" method="post"
@@ -47,6 +41,21 @@
                                     <button class="btn btn-danger btn-sm"
                                         onclick="return confirm('Are you sure you want to delete this card?')">Delete</button>
                                 </form>
+                            </td> -->
+                            <td >
+                                <a href="{{route('admin.books.edit',$book->id)}}" style="margin-right: 40px; color:blue;">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </a>
+                                <form action="{{route('admin.books.destroy',$book->id) }}" method="post"
+                                    style="display:inline; margin-right: 40px; color:red;">
+                                    @csrf
+                                    <button onclick="return confirm('Are you sure you want to delete this book?')">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                                <a href="{{  route('admin.books.show',$book->id) }}" style="margin-right: 40px;color:blue;">
+                                    <i class="fas fa-eye"></i>
+                                </a>
                             </td>
                         </tr>
                         @endforeach
@@ -54,5 +63,5 @@
                 </table>
             </div>
         </div>
-    </div>   
+    </div>
 </x-app-layout>

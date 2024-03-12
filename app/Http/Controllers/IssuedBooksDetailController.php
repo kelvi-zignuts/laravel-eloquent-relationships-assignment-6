@@ -80,6 +80,14 @@ public function store(Request $request)
         'return_date_at' => $request->is_returned == 1 ? 'required|date' : '', // Validate if 'is_returned' is true
     ]);
 
+    $issuedBook = IssuedBooksDetail::create($request->only([
+        'card_id',
+        'issued_date',
+        'fixed_return_date',
+        'is_returned',
+        'return_date_at',
+    ]));
+
     $cardId = $request->input('card_id');
     $bookId = $request->input('books')[0]; // Assuming only one book is selected for issuance
 
@@ -107,13 +115,6 @@ public function store(Request $request)
     }
 
     // Continue with the issuance process
-    $issuedBook = IssuedBooksDetail::create($request->only([
-        'card_id',
-        'issued_date',
-        'fixed_return_date',
-        'is_returned',
-        'return_date_at',
-    ]));
 
     // Attach the book to the issued details through the pivot table
     $issuedBook->books()->attach($bookId);
@@ -140,7 +141,18 @@ public function store(Request $request)
             'is_returned',
             'return_date_at',
         ]));
-        
+        $selectedBooks = $request->input('books', []);
+        $isBookAlreadyIssued = DB::table('issued_books')
+        ->join('issued_books_details', 'issued_books.issued_books_detail_id', '=', 'issued_books_details.id')
+        ->where('issued_books.book_id', $selectedBooks)
+        ->where('issued_books_details.is_returned', 0)
+        ->get();
+
+    if ($isBookAlreadyIssued->isNotEmpty()) {
+        return redirect()->route('admin.issued_books.edit', $issuedBook->id)
+            ->with('error', 'selected books are already issued to another user.');
+    }
+
         if ($request->input('is_returned') == 1) {
             $issuedBook->books()->detach();
         } else {

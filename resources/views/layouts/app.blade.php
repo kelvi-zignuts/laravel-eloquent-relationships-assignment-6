@@ -11,6 +11,10 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> -->
 
@@ -60,7 +64,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script>
-        // for multiple option selection
+    // for multiple option selection
     $(document).ready(function() {
         // Select2 Multiple
         $('.select2-multiple').select2({
@@ -99,14 +103,22 @@
 
         return true; // Continue with form submission
     }
+    </script>
+    <script>
+    // for alert messages
+    setTimeout(function() {
+        let errorAlert = document.getElementById('errorAlert');
+        if (errorAlert) {
+            errorAlert.style.display = 'none'; // Hide the initial error alert after a delay
+        }
+    }, 2000);
 
-    //for alert message
-        setTimeout(function () {
-            let errorAlert = document.getElementById('errorAlert');
-            if (errorAlert) {
-                errorAlert.style.display = 'none'; // Hide the initial alert after a delay
-            }
-        }, 2000);
+    setTimeout(function() {
+        let successAlert = document.getElementById('successAlert');
+        if (successAlert) {
+            successAlert.style.display = 'none'; // Hide the initial success alert after a delay
+        }
+    }, 2000);
     </script>
 </body>
 

@@ -5,6 +5,10 @@
             <div class="card-body">
                 <h2 class="card-title">Edit Issued Book</h2>
 
+                @if(session('error'))
+                    <div class="alert alert-danger" id="errorAlert">{{ session('error') }}</div>
+                @endif
+
                 <form action="{{ route('admin.issued_books.update', $issuedBook->id) }}" method="post" onsubmit="return validateForm()">
                     @csrf
                     <div class="form-group">
@@ -23,7 +27,7 @@
                         <select name="books[]" id="book_id" class="form-control">
                             @foreach ($books as $book)
                                 <option value="{{ $book->id }}" {{ $issuedBook->books->contains('id', $book->id) ? 'selected' : '' }}>
-                                    {{ $book->Title }}
+                                    {{ $book->title }}
                                 </option>
                             @endforeach
                         </select>

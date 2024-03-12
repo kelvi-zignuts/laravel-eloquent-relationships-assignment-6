@@ -23,7 +23,7 @@
                         <label for="book">Select Book:</label>
                         <select name="books[]" id="book" class="form-control" required>
                             @foreach ($books as $book)
-                                <option value="{{ $book->id }}">{{ $book->Title }}</option>
+                                <option value="{{ $book->id }}">{{ $book->title }}</option>
                             @endforeach
                         </select>
                     </div>
