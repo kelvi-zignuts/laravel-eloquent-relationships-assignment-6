@@ -1,4 +1,8 @@
 <x-app-layout>
+<div class="mt-3" style="color:blue;">
+        <a href="{{route('admin.books.index')}}"><i class="fas fa-arrow-circle-left"
+                style="margin-left:70px; font-size:20px;"></i></a>
+    </div>
     <div class="container mt-4 d-flex justify-content-center align-items-center">
         <div class="card" style="width: 50%;">
             <div class="card-body">
@@ -12,7 +16,7 @@
                     @endif
                     @endforeach
                 </p>
-                <a href="{{ route('admin.books.index') }}" class="btn btn-primary">Back</a>
+                <!-- <a href="{{ route('admin.books.index') }}" class="btn btn-primary">Back</a> -->
             </div>
         </div>
     </div>
