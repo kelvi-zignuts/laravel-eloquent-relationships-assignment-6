@@ -14,15 +14,15 @@ Laravel project using Eloquent : Relationships
    ```bash
    composer install
    ```
-   **Install javascript dependencies**
+4. **Install javascript dependencies**
    ```bash
    npm install
    ```
-4. **Copy the example environment file**
+5. **Copy the example environment file**
    ```bash
    cp .env.example .env
    ```
-5. **Generate application key**
+6. **Generate application key**
    ```bash
    php artisan key:generate
    ```
