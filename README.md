@@ -26,6 +26,10 @@ Laravel project using Eloquent : Relationships
    ```bash
    php artisan key:generate
    ```
+7. **To build css and js**
+    ```bash
+    npm run dev
+    ```
 
 ## Configuration
 1. **Database Setup**
@@ -36,8 +40,6 @@ Laravel project using Eloquent : Relationships
 
 1. **Serve the application**
     ```bash
-   npm run dev
-
    php artisan serve
    ```
 2. **Access the application**
