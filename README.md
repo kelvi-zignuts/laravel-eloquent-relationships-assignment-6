@@ -33,11 +33,11 @@ Laravel project using Eloquent : Relationships
    - Update the `.env` file with your database credentials.
 
 ## Usage
+
 1. **Serve the application**
-   ```bash
-   npm run dev
-   ```
     ```bash
+   npm run dev
+
    php artisan serve
    ```
 2. **Access the application**
