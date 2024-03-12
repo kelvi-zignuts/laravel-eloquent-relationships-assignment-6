@@ -1,9 +1,6 @@
 # library-management-system
 Laravel project using Eloquent : Relationships 
 
-
-# Library-management-system 
-Brief description of the project.
 ## Installation
 1. **Clone the repository**
    ```bash
