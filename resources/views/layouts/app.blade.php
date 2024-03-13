@@ -118,7 +118,7 @@
         function confirmDelete(cardId) {
         Swal.fire({
             title: 'Are you sure?',
-            text: 'You won\'t be able to revert this!',
+            text: 'You won\'t be able to delete this!',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#d33',
