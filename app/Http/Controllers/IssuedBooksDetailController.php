@@ -85,6 +85,8 @@ class IssuedBooksDetailController extends Controller
             'fixed_return_date'=>$returnDate,
         ]);
 
+        Mail::to($user->email)->send(new BookIssued($bookName, $userName));
+
         // Attach the book to the issued details through the pivot table
         $issuedBook->books()->attach($bookId);
 
