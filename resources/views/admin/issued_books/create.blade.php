@@ -1,13 +1,10 @@
 <x-app-layout>
-    <div class="container mt-4">
-        @if(session('error'))
-        <div class="alert alert-danger" id="errorAlert">{{ session('error') }}</div>
-        @endif
-    </div>
     <div class="container mt-4 d-flex justify-content-center align-items-center">
-        <div class="card" style="width: 50%;">
+        <div class="card shadow" style="width: 50%; border-radius: 10px;">
+            <div class="card-header text-center">
+                <h1 class="card-title">Add Issued Books</h1>
+            </div>
             <div class="card-body">
-                <h2 class="card-title">Create Issued Book</h2>
                 <form action="{{ route('admin.issued_books.store') }}" method="post">
                     @csrf
                     <div class="form-group">
@@ -15,7 +12,7 @@
                         <select name="card_id" id="card_id" class="form-control" required>
                             @foreach($libraryCards as $libraryCard)
                             <option value="{{ $libraryCard->id }}">{{ $libraryCard->card_id }} -
-                            {{ $libraryCard->name }}</option>
+                                {{ $libraryCard->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -28,13 +25,14 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="issued_date">Issued Date:</label>
-                        <input type="date" name="issued_date" id="issued_date" class="form-control" required>
+                        <label for="issued_date">Issued Date</label>
+                        <input type="date" class="form-control" id="issued_date" name="issued_date"
+                            value="{{ now()->toDateString() }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="fixed_return_date">Fixed Return Date:</label>
-                        <input type="date" name="fixed_return_date" id="fixed_return_date" class="form-control"
-                            required>
+                        <label for="expiry_date">Expiry Date</label>
+                        <input type="date" class="form-control" id="expiry_date" name="expiry_date"
+                            value="{{ now()->addWeek()->toDateString() }}" required>
                     </div>
                     <div class="form-group">
                         <label for="is_returned">Is Returned:</label>

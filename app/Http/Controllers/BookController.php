@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Genre;
+use App\Models\LibraryCard;
+use App\Models\IssuedBooksDetail;
 
 class BookController extends Controller
 {
@@ -13,11 +15,18 @@ class BookController extends Controller
     {
         // $books = Book::with('genres')->get();
         $books = Book::all();
-        $booksCount = Book::count();
-        return view('admin.books.index',['books'=>$books,'booksCount'=>$booksCount]);
+        return view('admin.books.index', ['books' => $books]);
 
     }
-
+    
+    public function dashboard()
+    {
+        $booksCount = Book::count();
+        $cardsCount = LibraryCard::count();
+        $genresCount = Genre::count();
+        $issuedBooksCount = IssuedBooksDetail::count();
+        return view('dashboard', compact('booksCount','cardsCount','genresCount','issuedBooksCount'));
+    }
     //create books
     public function create()
     {
@@ -50,7 +59,10 @@ class BookController extends Controller
     //edit books
     public function edit($id)
     {
-        $book = Book::findOrFail($id);
+        $book = Book::find($id);
+        if (!$book) {
+            return redirect()->route('admin.books.index')->with('error', 'Book not found with the provided ID.');
+        }
         $genres = Genre::all();
         return view('admin.books.edit',compact('book','genres'));
     }
@@ -86,7 +98,10 @@ class BookController extends Controller
     //view books with all details
     public function show($id)
     {
-        $book = Book::findOrFail($id);
+        $book = Book::find($id);
+        if (!$book) {
+            return redirect()->route('admin.books.index')->with('error', 'Book not found with the provided ID.');
+        }
         return view('admin.books.show', compact('book'));
     }
 }

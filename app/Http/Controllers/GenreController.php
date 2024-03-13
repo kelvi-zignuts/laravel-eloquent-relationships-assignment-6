@@ -39,9 +39,20 @@ class GenreController extends Controller
         return redirect()->route('admin.genres.index')->with('success', 'Genre created successfully!');
     }    
     // edit genre
+    // public function edit($id)
+    // {
+    //     $genre = Genre::findOrFail($id);
+    //     return view('admin.genres.edit', compact('genre'));
+    // }
+
     public function edit($id)
     {
-        $genre = Genre::findOrFail($id);
+        $genre = Genre::find($id);
+
+        if (!$genre) {
+            return redirect()->route('admin.genres.index')->with('error', 'Genre not found with the provided ID.');
+        }
+
         return view('admin.genres.edit', compact('genre'));
     }
 
@@ -49,7 +60,7 @@ class GenreController extends Controller
     public function update(Request $request, $id)
     {
         $user = auth()->user();
-        $genre = Genre::findOrFail($id);
+        $genre = Genre::find($id);
         $genreData = $request->only(['genre_name', 'description']);
         $genre->update($genreData + ['updated_by' => $user->id]);
     
@@ -59,7 +70,7 @@ class GenreController extends Controller
     // Delete genre 
     public function destroy($id)
     {
-        $genre = Genre::findOrFail($id);
+        $genre = Genre::find($id);
         $genre->delete();
 
         return redirect()->route('admin.genres.index')->with('success', 'Genre deleted successfully!');
@@ -68,7 +79,10 @@ class GenreController extends Controller
     //view all details
     public function show($id)
     {
-        $genre = Genre::findOrFail($id);
+        $genre = Genre::find($id);
+        if (!$genre) {
+            return redirect()->route('admin.genres.index')->with('error', 'Genre not found with the provided ID.');
+        }
         return view('admin.genres.show', compact('genre'));
     }
 }

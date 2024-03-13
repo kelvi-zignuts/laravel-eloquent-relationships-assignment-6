@@ -1,8 +1,11 @@
 <x-app-layout>
     <div class="container mt-4 d-flex justify-content-center align-items-center">
-        <div class="card" style="width: 50%;">
+        <div  class="card shadow" style="width: 50%; margin-top: 20px;  border-radius: 10px;">
+        <div class="card-header text-center">
+                <h1 class="card-title">Edit Issued Books</h1>
+            </div>
             <div class="card-body">
-                <h2 class="card-title">Edit Issued Book</h2>
+            
 
                 @if(session('error'))
                 <div class="alert alert-danger" id="errorAlert">{{ session('error') }}</div>
@@ -16,9 +19,8 @@
                         <select name="card_id" id="card_id" class="form-control">
                             @foreach($libraryCards as $libraryCard)
                             <option value="{{ $libraryCard->id }}"
-                                {{ $libraryCard->id == $issuedBook->card_id ? 'selected' : '' }}>
-                                {{ $libraryCard->name }} - {{ $libraryCard->user->name }}
-                            </option>
+                            {{ $libraryCard->id == $issuedBook->card_id ? 'selected' : '' }}>{{ $libraryCard->card_id }} -
+                            {{ $libraryCard->name }}</option>
                             @endforeach
                         </select>
                     </div>

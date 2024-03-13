@@ -1,13 +1,9 @@
 <x-app-layout>
-    <div class="container mt-4">
-        @if(session('success'))
-        <div class="alert alert-success" id="successAlert">{{ session('success') }}</div>
-        @endif
-        <div class="card">
+    <div class="container mt-4 d-flex justify-content-center align-items-center">
+        <div class="card shadow" style="width: 70%; border-radius: 10px;">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h1 class="card-title">All Books</h1>
-
-                <a href="{{ route('admin.books.create') }}" class="btn btn-primary">Add New Book</a>
+                <a href="{{ route('admin.books.create') }}" class="btn btn-primary">Add Book</a>
             </div>
             <div class="card-body">
                 <table class="table mt-3">
@@ -39,7 +35,7 @@
                             <td>
                                 <a href="{{route('admin.books.edit',$book->id)}}"
                                     style="margin-right: 40px; color:blue;">
-                                    <i class="fas fa-pencil-alt"></i>
+                                    <i class="fas fa-pencil-alt mr-40 "></i>
                                 </a>
                                 <form action="{{route('admin.books.destroy',$book->id) }}" method="post"
                                     style="display:inline; margin-right: 40px; color:red;">

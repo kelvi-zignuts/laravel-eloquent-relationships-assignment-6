@@ -8,6 +8,7 @@ use App\Models\LibraryCard;
 use App\Models\Book;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class IssuedBooksDetailController extends Controller
 {
@@ -33,8 +34,8 @@ class IssuedBooksDetailController extends Controller
     {
         $request->validate([
             'card_id' => 'required',
-            'issued_date' => 'required|date',
-            'fixed_return_date' => 'required|date',
+            // 'issued_date' => 'required|date',
+            // 'fixed_return_date' => 'required|date',
             'is_returned' => 'required|boolean',
             'return_date_at' => $request->is_returned == 1 ? 'required|date' : '', // Validate if is_returned is true
         ]);
@@ -66,15 +67,23 @@ class IssuedBooksDetailController extends Controller
                 ->with('error', 'This book is already issued by another user.');
             }
         }
-        
+
+        $currentDate = Carbon::now();
+
+        $issuedDate = now()->toDateString();
+
+        $returnDate = now()->addweek()->toDateString();
+
         // only() method with created_by
         $issuedBook = IssuedBooksDetail::create($request->only([
             'card_id',
-            'issued_date',
-            'fixed_return_date',
             'is_returned',
             'return_date_at',
-        ])+ ['created_by' => auth()->id()]);
+        ])+ [
+            'created_by' => auth()->id(),
+            'issued_date' =>$issuedDate,
+            'fixed_return_date'=>$returnDate,
+        ]);
 
         // Attach the book to the issued details through the pivot table
         $issuedBook->books()->attach($bookId);
@@ -83,9 +92,14 @@ class IssuedBooksDetailController extends Controller
     }
 
     //edit
-    public function edit(IssuedBooksDetail $issuedBook)
+    public function edit($id)
     {
-        $libraryCards = LibraryCard::with('user')->get();
+        
+        $issuedBook = IssuedBooksDetail::find($id);
+        if (!$issuedBook) {
+            return redirect()->route('admin.cards.index')->with('error', 'Issued books details not found with the provided ID.');
+        }
+        $libraryCards = LibraryCard::all();
         $books = Book::all();
         return view('admin.issued_books.edit', compact('issuedBook', 'libraryCards', 'books'));
     }
@@ -139,15 +153,20 @@ class IssuedBooksDetailController extends Controller
     }
     
     //delete
-    public function destroy(IssuedBooksDetail $issuedBook)
+    public function destroy($id)
     {
+        $issuedBook = IssuedBooksDetail::findorFail($id);
         $issuedBook->delete();
         return redirect()->route('admin.issued_books.index')->with('success', 'Issued book deleted successfully.');
     }
     
     //view all details
-    public function show(IssuedBooksDetail $issuedBook)
+    public function show($id)
     {
+        $issuedBook = IssuedBooksDetail::find($id);
+        if (!$issuedBook) {
+            return redirect()->route('admin.cards.index')->with('error', 'Issued books details not found with the provided ID.');
+        }
         return view('admin.issued_books.show', compact('issuedBook'));
     }
 }

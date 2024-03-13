@@ -1,10 +1,10 @@
 <x-app-layout>
-    <div class="container mt-4">
+    <!-- <div class="container mt-4">
         <a href="{{ route('admin.books.index') }}" class="btn btn-primary"
             style="margin-left: 10px; margin-bottom: 10px;">Back</a>
-    </div>
+    </div> -->
     <div class="container mt-4 d-flex justify-content-center align-items-center">
-        <div class="card" style="width: 50%; margin-top: 20px;">
+        <div class="card shadow" style="width: 50%; margin-top: 20px;  border-radius: 10px;">
             <div class="card-header text-center">
                 <h1 class="card-title">Edit Book</h1>
             </div>

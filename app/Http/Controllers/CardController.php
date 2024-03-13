@@ -6,6 +6,7 @@ use App\Models\LibraryCard;
 use App\Models\IssuedBooksDetail;
 use App\Models\Preference;
 use Auth;
+use Carbon\Carbon;
 
 class CardController extends Controller
 {
@@ -24,37 +25,50 @@ class CardController extends Controller
 
     //store in database
     public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'issued_date' => 'required|date',
-            'expiry_date' => 'required|date|after:issued_date',
-        ]);
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        // 'expiry_date' => 'required|date|after:issued_date',
+    ]);
 
-        $user = auth()->user();
+    $user = auth()->user();
 
-        $request_data = $request->only(['name', 'issued_date','expiry_date']);
+    // Use Carbon to get the current date and time
+    $currentDate = Carbon::now();
 
-        $libraryCard = LibraryCard::create($request_data + [
-            'card_id' => $this->generateCardId(),
-            'user_id' => $user->id,
-            'created_by' => $user->id,
-        ]);
+    $issuedDate = now()->toDateString();
 
-        return redirect()->route('admin.cards.index')->with('success', 'Library card created successfully!');
-    }
+    $expiryDate = now()->addYear()->toDateString();
 
+    $request_data = $request->only(['name']);
+
+    $libraryCard = LibraryCard::create($request_data + [
+        'card_id' => $this->generateCardId(),
+        'user_id' => $user->id,
+        'created_by' => $user->id,
+        'issued_date' => $currentDate, // Set the issued_date to the current date
+        'expiry_date' => $expiryDate,
+    ]);
+
+    return redirect()->route('admin.cards.index')->with('success', 'Library card created successfully!');
+}
     //view all details
     public function show($id)
     {
-        $card = LibraryCard::with('issuedBooksDetails')->findOrFail($id);
+        $card = LibraryCard::with('issuedBooksDetails')->find($id);
+        if (!$card) {
+            return redirect()->route('admin.cards.index')->with('error', 'card not found with the provided ID.');
+        }
         return view('admin.cards.show', compact('card'));
     }
 
     //edit 
     public function edit($id)
     {
-        $card = LibraryCard::findOrFail($id);
+        $card = LibraryCard::find($id);
+        if (!$card) {
+            return redirect()->route('admin.cards.index')->with('error', 'card not found with the provided ID.');
+        }
         return view('admin.cards.edit', compact('card'));
     }
 

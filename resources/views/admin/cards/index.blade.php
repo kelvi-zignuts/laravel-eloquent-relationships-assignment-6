@@ -1,14 +1,10 @@
 <x-app-layout>
-    <div class="container mt-4">
-
-        @if(session('success'))
-        <div class="alert alert-success" id="successAlert">{{ session('success') }}</div>
-        @endif
-        <div class="card">
+    <div class="container mt-4 d-flex justify-content-center align-items-center">
+        <div class="card shadow" style="width: 80%; border-radius: 10px;">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h1 class="card-title">Library Cards</h1>
 
-                <a href="{{ route('admin.cards.create') }}" class="btn btn-primary">Create Library Card</a>
+                <a href="{{ route('admin.cards.create') }}" class="btn btn-primary">Create User</a>
             </div>
             <div class="card-body">
                 <table class="table mt-3">

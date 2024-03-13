@@ -110,21 +110,29 @@
     }
     </script>
     <script>
-    // for alert messages
-    setTimeout(function() {
-        let errorAlert = document.getElementById('errorAlert');
-        if (errorAlert) {
-            errorAlert.style.display = 'none'; // Hide the initial error alert after a delay
+     function showSuccessAlert(message) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: message,
+            });
         }
-    }, 2000);
+        function showErrorAlert(message) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: message,
+            });
+        }
 
-    //for success message
-    setTimeout(function() {
-        let successAlert = document.getElementById('successAlert');
-        if (successAlert) {
-            successAlert.style.display = 'none'; // Hide the initial success alert after a delay
-        }
-    }, 2000);
+        // Automatically show success alert if success message exists
+        @if(session('success'))
+            showSuccessAlert('{{ session('success') }}');
+        @endif
+
+        @if(session('error'))
+            showErrorAlert('{{ session('error') }}');
+        @endif
     </script>
 </body>
 
