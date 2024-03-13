@@ -1,11 +1,13 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+// use App\Mail\WelcomeEmail;
+// use Illuminate\Support\Facades\Mail;
 // use App\Http\Controllers\AdminController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
-use App\Http\Controllers\GenreController;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\GenreController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\IssuedBooksDetailController;
 // use Illuminate\Support\Facades\Auth;
 // use App\Models\User;
@@ -25,6 +27,12 @@ use App\Http\Controllers\IssuedBooksDetailController;
 Route::get('/', function () {
     return view('auth.register');
 });
+// Route::get('/testroute', function() {
+//     $name = "users";
+
+//     // The email sending is done using the to method on the Mail facade
+//     Mail::to('test@gmail.com’')->send(new WelcomeEmail($name));
+// });
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

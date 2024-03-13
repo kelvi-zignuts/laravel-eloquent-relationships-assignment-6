@@ -1,6 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Mail\WelcomeEmail;
+use Illuminate\Support\Facades\Mail;
+
 use Illuminate\Http\Request;
 use App\Models\LibraryCard;
 use App\Models\IssuedBooksDetail;
@@ -42,6 +45,7 @@ class CardController extends Controller
 
     $request_data = $request->only(['name']);
 
+    
     $libraryCard = LibraryCard::create($request_data + [
         'card_id' => $this->generateCardId(),
         'user_id' => $user->id,
@@ -50,6 +54,8 @@ class CardController extends Controller
         'expiry_date' => $expiryDate,
     ]);
 
+   Mail::to($user->email)->send(new WelcomeEmail($libraryCard));
+    
     return redirect()->route('admin.cards.index')->with('success', 'Library card created successfully!');
 }
     //view all details

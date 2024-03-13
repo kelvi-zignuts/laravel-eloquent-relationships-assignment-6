@@ -83,6 +83,7 @@
     function toggleReturnDateField() {
         let isReturned = document.getElementById('is_returned').value;
         let returnDateInput = document.getElementById('return_date_at');
+        
 
         if (isReturned == 1) {
             returnDateInput.removeAttribute('disabled');

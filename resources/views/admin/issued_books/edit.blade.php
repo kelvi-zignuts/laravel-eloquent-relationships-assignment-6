@@ -1,16 +1,10 @@
 <x-app-layout>
     <div class="container mt-4 d-flex justify-content-center align-items-center">
-        <div  class="card shadow" style="width: 50%; margin-top: 20px;  border-radius: 10px;">
-        <div class="card-header text-center">
+        <div class="card shadow" style="width: 50%; margin-top: 20px;  border-radius: 10px;">
+            <div class="card-header text-center">
                 <h1 class="card-title">Edit Issued Books</h1>
             </div>
             <div class="card-body">
-            
-
-                @if(session('error'))
-                <div class="alert alert-danger" id="errorAlert">{{ session('error') }}</div>
-                @endif
-
                 <form action="{{ route('admin.issued_books.update', $issuedBook->id) }}" method="post"
                     onsubmit="return validateForm()">
                     @csrf
@@ -19,8 +13,9 @@
                         <select name="card_id" id="card_id" class="form-control">
                             @foreach($libraryCards as $libraryCard)
                             <option value="{{ $libraryCard->id }}"
-                            {{ $libraryCard->id == $issuedBook->card_id ? 'selected' : '' }}>{{ $libraryCard->card_id }} -
-                            {{ $libraryCard->name }}</option>
+                                {{ $libraryCard->id == $issuedBook->card_id ? 'selected' : '' }}>
+                                {{ $libraryCard->card_id }} -
+                                {{ $libraryCard->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -64,7 +59,6 @@
                             value="{{ $issuedBook->return_date_at }}"
                             {{ $issuedBook->is_returned == 0 ? 'disabled' : '' }}>
                     </div>
-
                     <button class="btn btn-primary mt-3">Update Issued Book</button>
                 </form>
             </div>

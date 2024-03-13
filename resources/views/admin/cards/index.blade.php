@@ -4,7 +4,7 @@
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h1 class="card-title">Library Cards</h1>
 
-                <a href="{{ route('admin.cards.create') }}" class="btn btn-primary">Create User</a>
+                <a href="{{ route('admin.cards.create') }}" class="btn btn-primary">Create Users</a>
             </div>
             <div class="card-body">
                 <table class="table mt-3">
