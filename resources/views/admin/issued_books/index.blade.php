@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="container mt-4 d-flex justify-content-center align-items-center">
-       
+
         <div class="card shadow" style="width: 90%; border-radius: 10px;">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h1 class="card-title">Issued Books</h1>
@@ -38,10 +38,11 @@
                                     style="margin-right: 40px; color:blue;">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
-                                <form action="{{route('admin.issued_books.destroy', $issuedBook->id) }}" method="post"
-                                    style="display:inline; margin-right: 40px; color:red;">
+                                <form action="{{ route('admin.issued_books.destroy', $issuedBook->id) }}" method="post"
+                                    style="display:inline; margin-right: 40px; color:red;"
+                                    id="deleteForm{{ $issuedBook->id }}">
                                     @csrf
-                                    <button onclick="return confirm('Are you sure you want to delete this book?')">
+                                    <button type="button" onclick="confirmDelete('{{ $issuedBook->id }}')">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>

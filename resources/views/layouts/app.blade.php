@@ -102,8 +102,12 @@
         let isReturned = document.getElementById('is_returned').value;
         let returnDateInput = document.getElementById('return_date_at').value;
 
-        if (isReturned == 1 && returnDateInput.trim() === '') {
-            alert('Return Date At is required when "Is Returned" is set to "Yes".');
+        if (isReturned == 1 && returnDateInput === '') {
+            Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Return Date At is required when "Is Returned" is set to "Yes".',
+    });
             return false;
         }
 
@@ -111,6 +115,21 @@
     }
     </script>
     <script>
+        function confirmDelete(cardId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You won\'t be able to revert this!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('deleteForm' + cardId).submit();
+            }
+        });
+    }
      function showSuccessAlert(message) {
             Swal.fire({
                 icon: 'success',

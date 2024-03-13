@@ -16,7 +16,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @if($books->isEmpty())
+                        @if($books->isEmpty())
                         <tr>
                             <td colspan="4" class="text-center" style="color:red;">No books available</td>
                         </tr>
@@ -37,10 +37,11 @@
                                     style="margin-right: 40px; color:blue;">
                                     <i class="fas fa-pencil-alt mr-40 "></i>
                                 </a>
-                                <form action="{{route('admin.books.destroy',$book->id) }}" method="post"
-                                    style="display:inline; margin-right: 40px; color:red;">
+                                <form action="{{ route('admin.books.destroy', $book->id) }}" method="post"
+                                    style="display:inline; margin-right: 40px; color:red;"
+                                    id="deleteForm{{ $book->id }}">
                                     @csrf
-                                    <button onclick="return confirm('Are you sure you want to delete this book?')">
+                                    <button type="button" onclick="confirmDelete('{{ $book->id }}')">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>

@@ -34,10 +34,11 @@
                                     style="margin-right: 40px; color:blue;">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
-                                <form action="{{route('admin.cards.destroy', $card->id) }}" method="post"
-                                    style="display:inline; margin-right: 40px; color:red;">
+                                <form action="{{ route('admin.cards.destroy', $card->id) }}" method="post"
+                                    style="display:inline; margin-right: 40px; color:red;"
+                                    id="deleteForm{{ $card->id }}">
                                     @csrf
-                                    <button onclick="return confirm('Are you sure you want to delete this book?')">
+                                    <button type="button" onclick="confirmDelete('{{ $card->id }}')">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>
