@@ -89,7 +89,7 @@
             returnDateInput.removeAttribute('disabled');
             returnDateInput.value = ''; // Clear value
         } else {
-            returnDateInput.setAttribute('disabled', 'disabled');
+            returnDateInput.setAttribute('disabled');
             returnDateInput.value = '-'; // Set value to '-'
         }
     }
