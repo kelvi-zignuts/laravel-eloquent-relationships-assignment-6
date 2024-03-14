@@ -27,6 +27,9 @@ use App\Http\Controllers\IssuedBooksDetailController;
 Route::get('/', function () {
     return view('auth.register');
 });
+Route::get('/showmail', function () {
+    return view('mail.issued-book');
+});
 // Route::get('/testroute', function() {
 //     $name = "users";
 

@@ -7,7 +7,6 @@
             <div class="card-body">
                 <form action="{{ route('admin.genres.update', $genre->id) }}" method="post">
                     @csrf
-                    @method('PUT')
                     <div class="form-group">
                         <label for="genre_name">Name</label>
                         <input type="text" class="form-control" id="genre_name" name="genre_name" value="{{ $genre->genre_name }}">

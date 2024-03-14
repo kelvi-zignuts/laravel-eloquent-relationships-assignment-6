@@ -11,22 +11,23 @@
                     <h1 class="card-title">Issued Books Details</h1>
                 </div>
                 <div class="card-body">
-                @if ($issuedBook->is_returned)
+                    <h5><strong>Library Card:</strong> {{ $issuedBook->libraryCard->name }} -
+                        {{ $issuedBook->libraryCard->user->name }}</h5>
+                    <p><strong>Issued Date:</strong> {{ $issuedBook->issued_date }}</p>
+                    <p><strong>Fixed Return Date:</strong> {{ $issuedBook->fixed_return_date }}</p>
+                    
+                    <p><strong>Issued Books: </strong>
+                        @foreach ($issuedBook->books as $book)
+                            {{ $book->title }}
+                            @if (!$loop->last)
+                                ,
+                            @endif
+                        @endforeach
+                    </p>
+                    @if ($issuedBook->is_returned)
                         <h5><strong>Return Book:</strong> Book has been returned</h5>
                         <p><strong>Return Date:</strong> {{ $issuedBook->return_date_at }}</p>
-                    @else
-                        <h5><strong>Library Card:</strong> {{ $issuedBook->libraryCard->name }} -
-                            {{ $issuedBook->libraryCard->user->name }}</h5>
-                        <p><strong>Issued Date:</strong> {{ $issuedBook->issued_date }}</p>
-                        <p><strong>Fixed Return Date:</strong> {{ $issuedBook->fixed_return_date }}</p>
-                        <p><strong>Issued Books: </strong>
-                            @foreach ($issuedBook->books as $book)
-                                {{ $book->title }}
-                                @if (!$loop->last)
-                                    ,
-                                @endif
-                            @endforeach
-                        </p>
+                        
                     @endif
                 </div>
             </div>

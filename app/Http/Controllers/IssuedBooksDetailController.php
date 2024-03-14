@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BookIssued;
+use Illuminate\Support\Facades\Mail;
+
 use Illuminate\Http\Request;
 use App\Models\IssuedBooksDetail;
 use App\Models\LibraryCard;
@@ -43,7 +46,8 @@ class IssuedBooksDetailController extends Controller
         
         $cardId = $request->input('card_id');
         $bookId = $request->input('books')[0]; // Assuming only one book is selected
-        
+        $book = Book::find($bookId);
+
         // Check if the book is already issued using issued_book table 
         $isBookAlreadyIssued = DB::table('issued_books')
         ->join('issued_books_details', 'issued_books.issued_books_detail_id', '=', 'issued_books_details.id')
@@ -84,11 +88,17 @@ class IssuedBooksDetailController extends Controller
             'issued_date' =>$issuedDate,
             'fixed_return_date'=>$returnDate,
         ]);
+        $user = Auth::user();
+        $cardId = $request->input('card_id');
+        $card = LibraryCard::find($cardId);
 
-        Mail::to($user->email)->send(new BookIssued($bookName, $userName));
+        Mail::to($request->user()->email)->send(new BookIssued($card, $book, $request->card_id, $request->is_returned,$issuedDate, $returnDate));
+
 
         // Attach the book to the issued details through the pivot table
         $issuedBook->books()->attach($bookId);
+        // $issuedBook->books()->attach($bookId, ['is_returned' => $request->input('is_returned')]);
+
 
         return redirect()->route('admin.issued_books.index')->with('success', 'Issued book added successfully.');
     }
@@ -118,39 +128,45 @@ class IssuedBooksDetailController extends Controller
             'return_date_at',
         ]) + ['updated_by' => Auth::id()]);
 
-        $selectedBooks = $request->input('books', []);
-
-        //if already used book then in edit time not select issued book by another user
-        $isBookAlreadyIssued = DB::table('issued_books')
-        ->join('issued_books_details', 'issued_books.issued_books_detail_id', '=', 'issued_books_details.id')
-        ->where('issued_books.book_id', $selectedBooks)
-        ->where('issued_books_details.is_returned', 0)
-        ->get();
-
-    
-        if ($isBookAlreadyIssued->isNotEmpty()) {
-            return redirect()->route('admin.issued_books.edit', $issuedBook->id)
-                ->with('error', 'selected books are already issued to another user.');
-        }
-
-        if ($request->input('is_returned') == 1) {
-            // it only if the book is returned
-            $issuedBook->books()->detach();
-        } else {
-            // If 'is_returned' is not 'Yes', proceed with attaching selected books
+        if ($request->input('is_returned') != 1) {
             $selectedBooks = $request->input('books', []);
     
-            // it before assigning new books regardless of the return status
-            $issuedBook->books()->detach();
-    
-            foreach ($selectedBooks as $bookId) {
-                $book = Book::find($bookId);
-    
-                if ($book) {
-                    $issuedBook->books()->attach($bookId);
-                }
-            }
+            // Attach the selected books to the issued details
+            $issuedBook->books()->syncWithoutDetaching($selectedBooks);
         }
+
+        // $selectedBooks = $request->input('books', []);
+        // //if already used book then in edit time not select issued book by another user
+        // $isBookAlreadyIssued = DB::table('issued_books')
+        // ->join('issued_books_details', 'issued_books.issued_books_detail_id', '=', 'issued_books_details.id')
+        // ->where('issued_books.book_id', $selectedBooks)
+        // ->where('issued_books_details.is_returned', 0)
+        // ->get();
+
+    
+        // if ($isBookAlreadyIssued->isNotEmpty()) {
+        //     return redirect()->route('admin.issued_books.edit', $issuedBook->id)
+        //         ->with('error', 'selected books are already issued to another user.');
+        // }
+
+        // if ($request->input('is_returned') == 1) {
+        //     // it only if the book is returned
+        //     $issuedBook->books()->detach();
+        // } else {
+        //     // If 'is_returned' is not 'Yes', proceed with attaching selected books
+        //     $selectedBooks = $request->input('books', []);
+    
+        //     // it before assigning new books regardless of the return status
+        //     $issuedBook->books()->detach();
+    
+        //     foreach ($selectedBooks as $bookId) {
+        //         $book = Book::find($bookId);
+    
+        //         if ($book) {
+        //             $issuedBook->books()->attach($bookId);
+        //         }
+        //     }
+        // }
         return redirect()->route('admin.issued_books.index')->with('success', 'Issued book updated successfully.');
     }
     
@@ -166,6 +182,7 @@ class IssuedBooksDetailController extends Controller
     public function show($id)
     {
         $issuedBook = IssuedBooksDetail::find($id);
+        // dd($issuedBook);
         if (!$issuedBook) {
             return redirect()->route('admin.cards.index')->with('error', 'Issued books details not found with the provided ID.');
         }

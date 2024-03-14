@@ -13,22 +13,34 @@ class BookIssued extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $bookName;
     public $card;
+    public $book;
+    public $cardId;
+    public $isReturned;
+    public $issuedDate;
+    public $returnDate;
+    
+    
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($card, $book, $cardId, $isReturned,$issuedDate, $returnDate)
     {
         $this->card = $card;
-        $this->bookName = $bookName;
+        $this->book = $book;
+        $this->cardId = $cardId;
+        $this->isReturned = $isReturned;
+        $this->issuedDate = $issuedDate;
+        $this->returnDate= $returnDate;
     }
 
+   
     public function build()
-    {
-        return $this->subject('Welcome to Your App')->view('mail.issued-book');
-    }
+{
+    return $this->subject('Welcome to Your App')->view('mail.issued-book');
+}
+
 
     /**
      * Get the message envelope.
@@ -46,7 +58,7 @@ class BookIssued extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'mail.issued-book',
         );
     }
 

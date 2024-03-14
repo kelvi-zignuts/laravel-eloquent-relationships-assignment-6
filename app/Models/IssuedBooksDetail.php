@@ -44,4 +44,9 @@ class IssuedBooksDetail extends Model
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
+
+    public function book()
+    {
+        return $this->belongsTo(Book::class, 'issued_books');
+    }
 }

@@ -26,7 +26,10 @@
                             <td>{{$book->title }}</td>
                             <td>{{$book->author}}</td>
                             <td>
-                                @if($book->issuedBooksDetails->isNotEmpty())
+                            @php
+                                $issued = $book->issuedBooksDetails->where('is_returned', 0)->isNotEmpty();
+                                @endphp
+                                @if($issued)
                                 <span style="color: red;">Issued</span>
                                 @else
                                 <span style="color: green;">Available</span>
