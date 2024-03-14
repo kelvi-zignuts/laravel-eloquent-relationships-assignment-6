@@ -34,6 +34,8 @@ class CardController extends Controller
         // 'expiry_date' => 'required|date|after:issued_date',
     ]);
 
+    
+
     $user = auth()->user();
 
     // Use Carbon to get the current date and time
@@ -54,7 +56,9 @@ class CardController extends Controller
         'expiry_date' => $expiryDate,
     ]);
 
-   Mail::to($user->email)->send(new WelcomeEmail($libraryCard));
+    if (!$existingUser) {
+        Mail::to($user->email)->send(new WelcomeEmail($libraryCard));
+    }
     
     return redirect()->route('admin.cards.index')->with('success', 'Library card created successfully!');
 }
